@@ -1,0 +1,3 @@
+build/
+#secure_boot_signing_key-V1.pem
+#secure_boot_signing_key.pem
