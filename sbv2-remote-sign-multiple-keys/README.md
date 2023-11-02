@@ -14,3 +14,6 @@ python C:\esp\esp-idf\components\esptool_py\esptool\espsecure.py sign_data bootl
 
 
 c:\esp\tools\python_env\idf5.0_py3.8_env\Scripts\python.exe ..\..\..\..\..\esp\esp-idf\components\esptool_py\esptool\esptool.py -p COM9 -b 460800 --before default_reset --after no_reset --chip esp32s3 --no-stub write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x10000 partition-table.bin 0x20000 flash-encryption.bin 0x3e0000 ota_data_initial.bin
+
+
+c:\esp\tools\python_env\idf5.0_py3.8_env\Scripts\python.exe ..\..\..\..\esp\esp-idf\components\esptool_py\esptool\esptool.py -p COM9 -b 460800 --before default_reset --after no_reset --chip esp32s3 --no-stub write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x10000 build\partition_table\partition-table.bin 0x20000 build\flash-encryption.bin 0x3e0000 build\ota_data_initial.bin
