@@ -1,4 +1,21 @@
+> ⚠️flashing this version will permanently change your ESP32
+
 # Secure boot version 1
+
+## commands
+
+to generate an elliptic private key you can either use
+
+```bash
+# espsecure.py
+python ${IDF_PATH}/components/esptool_py/esptool/espsecure.py generate_signing_key key.pem
+# or openssl
+openssl ecparam -name prime256v1 -genkey -noout -out key.pem
+```
+
+## resources
+
+[online byte converter](https://www.alterlinks.com/byte-converter/byte-converter.php)
 
 If you are interested on Elliptic Curves work check this out
 
