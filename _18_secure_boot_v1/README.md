@@ -19,7 +19,7 @@ openssl ecparam -name prime256v1 -genkey -noout -out key.pem
 
 If you are interested on Elliptic Curves work check this out
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/NF1pwjL9-DE/0.jpg)](https://www.youtube.com/watch?v=NF1pwjL9-DE)
+[![youtube elliptic curve](https://img.youtube.com/vi/NF1pwjL9-DE/0.jpg)](https://www.youtube.com/watch?v=NF1pwjL9-DE)
 
 https://www.youtube.com/watch?v=NF1pwjL9-DE
 

@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <time.h>
+#include "esp_sntp.h"
 #include "mbedtls/md.h"
 #include "mbedtls/sha256.h"
 #include "mbedtls/base64.h"
@@ -10,9 +8,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
-#include "esp_sntp.h"
+#include "esp_http_client.h"
 
-// static char *TAG = "S3 OTA";
+static char *TAG = "S3 OTA";
 
 void on_got_time(struct timeval *tv);
 void get_time_from_ntp(char *ntp_address);
@@ -22,6 +20,20 @@ void create_canonical_request(char *signed_headers, char *amz_date, s3_params_t 
 char *urlencode(char *originalText, bool ignore_slashes);
 
 static SemaphoreHandle_t got_time_semaphore;
+
+void http_client_set_aws_header(esp_http_client_handle_t http_client, s3_params_t *s3_params)
+{
+    char authorization_header[250] = {};
+    char amz_date[30] = {};
+    char content_hash[65] = {};
+
+    get_s3_headers("pool.ntp.org", s3_params, authorization_header, amz_date, content_hash);
+
+    esp_http_client_set_header(http_client, "x-amz-date", amz_date);
+    esp_http_client_set_header(http_client, "Authorization", authorization_header);
+    esp_http_client_set_header(http_client, "x-amz-content-sha256", content_hash);
+    esp_http_client_set_header(http_client, "host", s3_params->host);
+}
 
 void calculate_s3_header(char *amz_date, char *date_stamp, s3_params_t *s3_params, char *authorization_header, char *out_payload_hash)
 {
@@ -66,13 +78,13 @@ void create_canonical_request(char *signed_headers, char *amz_date, s3_params_t 
     char canonical_headers[200] = {};
     sprintf(canonical_headers, "host:%s\nx-amz-date:%s\n", s3_params->host, amz_date);
 
-    get_sha256_as_string("", out_payload_hash);
+    get_sha256_as_string(s3_params->content == NULL ? "" : s3_params->content, out_payload_hash);
 
     char *canonical_query_string = "";
     char canonical_request[300] = {};
     char *encoded_canonical_uri = urlencode(s3_params->canonical_uri, true);
-    sprintf(canonical_request, "GET\n%s\n%s\n%s\n%s\n%s",
-            encoded_canonical_uri, canonical_query_string, canonical_headers, signed_headers, out_payload_hash);
+    sprintf(canonical_request, "%s\n%s\n%s\n%s\n%s\n%s",
+            s3_params->method, encoded_canonical_uri, canonical_query_string, canonical_headers, signed_headers, out_payload_hash);
     free(encoded_canonical_uri);
     // step 2 create a hash of the canonical request
     get_sha256_as_string(canonical_request, canonical_request_digest);
@@ -80,7 +92,7 @@ void create_canonical_request(char *signed_headers, char *amz_date, s3_params_t 
 
 void get_s3_headers(char *ntp_address, s3_params_t *s3_params, char *out_authorization_header, char *out_amz_date, char *out_payload_hash)
 {
-    if (ntp_address != NULL)
+    if (ntp_address != NULL && s3_params->should_get_time)
     {
         //"pool.ntp.org"
         // printf("getting time from %s\n", ntp_address);

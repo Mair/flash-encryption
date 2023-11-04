@@ -14,7 +14,7 @@ void print_status(void);
 
 void app_main(void)
 {
-    printf("hello from OTA (new version)\n");
+    printf("hello from OTA (remote signed)\n");
 
     print_status();
 
