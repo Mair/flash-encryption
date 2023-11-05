@@ -1,3 +1,7 @@
+# AWS IAM policies
+
+below are some AWS policies to allow access to S3 buckets
+
 ## Read only permissions
 
 ```json

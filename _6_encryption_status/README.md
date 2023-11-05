@@ -1,16 +1,5 @@
 # Encryption Status
 
-    ✅create a secret
-    ✅update partition table
-    ✅use FAT storage
-    ✅add NVS
-    ✅steel secrets
-    ✅examining efuse's
-
----
-
-    ✅Encryption status with code
-
 ```C
 void print_status(void)
 {

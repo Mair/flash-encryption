@@ -1,6 +1,6 @@
 > ⚠️flashing this version will permanently change your ESP32
 
-# Secure boot version 2
+# Secure boot version 2 configuration
 
 > targets the esp32s3
 

@@ -1,6 +1,4 @@
-> ⚠️flashing this version will permanently change your ESP32
-
-# Secure boot version 2
+# Remote Sign with OTA
 
 > targets the esp32s3
 

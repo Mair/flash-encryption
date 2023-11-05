@@ -1,20 +1,3 @@
-# Building a basic app
-
-    ✅create a secret
-    ✅update partition table
-    ✅use FAT storage
-
----
-
-    ✅add NVS
-
-## commands
-
-```bash
-# This command is used in the "steeling secrets" video
-python ${IDF_PATH}/esptool.py -p COM7 -b 460800 read_flash 0 0x400000 flash.bin
-```
-
 ## NVS Code
 
 ```C

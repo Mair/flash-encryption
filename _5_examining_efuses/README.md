@@ -1,14 +1,4 @@
-# Building a basic app
-
-    ✅create a secret
-    ✅update partition table
-    ✅use FAT storage
-    ✅add NVS
-    ✅steel secrets
-
----
-
-    ✅examining efuse's
+# Examining e-fuses
 
 ## commands
 

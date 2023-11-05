@@ -4,10 +4,10 @@
 
 ## commands
 
-to generate an elliptic private key you can either use
+Use either of the below two commands to generate an elliptic private key.
 
 ```bash
-# espsecure.py
+# you can use espsecure.py
 python ${IDF_PATH}/components/esptool_py/esptool/espsecure.py generate_signing_key key.pem
 # or openssl
 openssl ecparam -name prime256v1 -genkey -noout -out key.pem
@@ -15,9 +15,8 @@ openssl ecparam -name prime256v1 -genkey -noout -out key.pem
 
 ## resources
 
-[online byte converter](https://www.alterlinks.com/byte-converter/byte-converter.php)
+to convert bytes sizes to hex you can use the [online byte converter](https://www.alterlinks.com/byte-converter/byte-converter.php)
 
-If you are interested on Elliptic Curves work check this out
+If you are interested on how the Elliptic Curves works, check this out.
 
 [![youtube elliptic curve](https://img.youtube.com/vi/NF1pwjL9-DE/0.jpg)](https://www.youtube.com/watch?v=NF1pwjL9-DE)
-

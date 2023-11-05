@@ -1,10 +1,17 @@
 > ⚠️flashing this version will permanently change your ESP32
 
-# Secure boot version 2
-
-> targets the esp32s3
+# Multiple signing keys
 
 ## commands
+
+(powershell optional) view only current directory
+
+```powershell
+function prompt {
+ $p = Split-Path -Leaf -Path (Get-Location)
+ "$p> "
+}
+```
 
 generate private keys
 
@@ -34,7 +41,15 @@ flashing the bootloader
 idf.py bootloader-flash
 ```
 
+flashing the chip if idf.py flash does not work
+
+```bash
+python <path_tools_dir>\esptool.py -p (PORT) -b 460800 --before default_reset --after no_reset --chip esp32s3 --no-stub write_flash --flash_mode dio --flash_size <size of chip>MB --flash_freq 80m 0x10000 build\partition_table\partition-table.bin 0x20000 build\flash-encryption.bin 0x3e0000 build\ota_data_initial.bin
+```
+
 inspecting the e-fuses
+
+NB. this will not work on a chip that has its UART permanently disabled
 
 ```bash
 python ${IDF_PATH}/components/esptool_py/esptool/espfuse.py -p COM9 summary
