@@ -2,7 +2,7 @@
 
 ## resources
 
-[official esp32 docs on SCV2](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html)
+[official esp32 docs on SBV2](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/security/secure-boot-v2.html)
 
 An excellent explanation of RSA
 
