@@ -3,6 +3,6 @@
 nvs,      data, nvs,     ,        0x6000, 
 phy_init, data, phy,     ,        0x1000,
 factory,  app,  factory, ,        1M,
-storage,  data, fat,     ,        528K,
+storage,  data, fat,     ,        528K, 
 nvs_key,  data, nvs_keys,,        0x1000,
 nvs_priv, data, nvs,     ,        0x6000, 
