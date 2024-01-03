@@ -65,7 +65,7 @@ void app_main(void)
     const esp_partition_t *esp_partition = esp_partition_find_first(ESP_PARTITION_TYPE_DATA, ESP_PARTITION_SUBTYPE_DATA_NVS_KEYS, NULL);
     nvs_sec_cfg_t nvs_sec_cfg = {};
     nvs_flash_read_security_cfg(esp_partition, &nvs_sec_cfg);
-    nvs_flash_secure_init_partition("nvs_priv", &nvs_sec_cfg)
+    nvs_flash_secure_init_partition("nvs_priv", &nvs_sec_cfg);
 #endif
     nvs_handle_t nvs_handle;
     nvs_open_from_partition("nvs_priv", "store", NVS_READWRITE, &nvs_handle);
